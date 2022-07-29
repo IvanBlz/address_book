@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+
+  node_back:
+    container_name: node_address_book
+    hostname: host-node
+    restart: always
+    build: .
+    ports:
+      - "4000:3000"
+    links:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    container_name: mongodb_adress_book
+    hostname: host-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
+      MONGO_INITDB_DATABASE: addres_book
+      
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./data:/data/db
+      - ./data/log:/var/log/mongodb/
+    ports:
+      - "27017:27017"
