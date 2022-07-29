@@ -1,4 +1,4 @@
-db.createUser( { user: "root", pwd: "secret", roles: [ { role: "readWrite", db: "addres_book" } ] } );
+db.createUser( { user: "root", pwd: "secret", roles: [ { role: "readWrite", db: "admin" } ] } );
 
 db.contacts.aggregate(
     [
